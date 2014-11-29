@@ -73,14 +73,24 @@ namespace ParticleForker
             while (!HasSettings)
             {
                 // unzip particles first
-                if (!Directory.Exists(Environment.CurrentDirectory + @"\decompiled_particles"))
-                {
-                    string zipPath = Environment.CurrentDirectory + @"\particles.zip";
+                while (!Directory.Exists(Environment.CurrentDirectory + @"\decompiled_particles")) {
+                    DialogResult res = MessageBox.Show("No decompiled_particles folder detected. Please extract decompiled_particles.rar into the ParticleForker folder before proceding.", "ParticleForker",
+                        MessageBoxButtons.OKCancel,MessageBoxIcon.Exclamation);
+
+                    if (res == DialogResult.Cancel)
+                    {
+                        Environment.Exit(1);
+                    }
+
+                    // this unfortunately gives an Unauthorized access exception on Directory.Move.
+                    // Also, can't unzip directly into the Environment.CurrentDirectory because of the PathTooLong exception.
+
+                    /*string zipPath = Environment.CurrentDirectory + @"\particles.zip";
                     string extractPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"\decompiled_particles";
                     MessageBox.Show("No decompiled particles detected. Extracting particles; please stand by.", "ParticleForker");
                     ZipFile.ExtractToDirectory(zipPath, extractPath);
                     // move the zipfiles over to the correct folder once done with extracting.
-                    Directory.Move(extractPath, Environment.CurrentDirectory + @"\decompiled_particles");
+                    Directory.Move(extractPath, Environment.CurrentDirectory + @"\decompiled_particles");*/
                 }
 
                 MessageBox.Show("Please select the path to your dota_ugc folder.", "ParticleForker", MessageBoxButtons.OK);
