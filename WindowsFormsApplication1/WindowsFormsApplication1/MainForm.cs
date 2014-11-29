@@ -208,26 +208,28 @@ namespace ParticleForker
 
                     string folderPath = browser.SelectedPath;
                     // make sure the user didn't click cancel before we procede.
-                    if (folderPath != "" && folderPath != initialPath)
+                    if (folderPath != "")
                     {
                         string folderName = folderPath.Substring(folderPath.LastIndexOf('\\') + 1);
-                        int particlesForked = 0;
+                        int particlesCopied = 0;
                         foreach (string path in ParticlePaths)
                         {
                             bool overwriteAllowed = true;
                             string particleName = path.Substring(path.LastIndexOf('\\') + 1);
                             string targetPath = folderPath + "\\" + particleName;
+                            particlesCopied++;
                             try
                             {
                                 System.IO.File.Copy(path, targetPath);
                             }
                             catch (IOException overwriteException)
                             {
-                                string warn = "You are about to overwrite " + targetPath + ". Overwrite?";
+                                string warn = "You are about to overwrite " + targetPath + ". Procede?";
                                 DialogResult result = MessageBox.Show(warn, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                                 if (!result.Equals(DialogResult.Yes))
                                 {
                                     overwriteAllowed = false;
+                                    particlesCopied--;
                                 }
                             }
 
@@ -262,19 +264,18 @@ namespace ParticleForker
                                 {
                                     // everything in the array is now correct. copy the array to the new file.
                                     System.IO.File.WriteAllText(targetPath, allText);
-                                    particlesForked++;
                                 }
                             }
                              
                          }
-                        if (particlesForked == 0)
+                        if (particlesCopied == 0)
                         {
-                            MessageBox.Show("No particles have been copied over.");
+                            MessageBox.Show("No particles have been copied over.", "ParticleForker", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
-                            MessageBox.Show("All selected particles have been copied to: " + folderPath + 
-                                "\nand their child references have been updated.", "Success", MessageBoxButtons.OK);
+                            MessageBox.Show("Particles have been copied to: " + folderPath + 
+                                " and their child references have been updated.", "ParticleForker", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
