@@ -17,4 +17,5 @@ Thanks to ToraxXx for decompiling all of the particles. https://github.com/torax
 
 ## Notes
 
-This is my first C# project, so the code definitely isn't the greatest!
+* You may have to restart the Workshop Tools to see the copied particles in the asset browser.
+* This is my first C# project, so the code definitely isn't the greatest!
