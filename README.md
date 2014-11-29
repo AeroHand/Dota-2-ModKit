@@ -11,7 +11,7 @@ A GUI to fork decompiled Dota 2 Particles into your addons. This will automatica
 2. If you already have the decompiled particles, move them over to the ParticlesForker folder. **Rename the decompiled particles folder to decompiled_particles**. If you don't have the decompiled particles, this program comes with decompiled_particles.rar which you can extract.
 3. Open ParticleForker.exe
 
-* After you copy over particles, you may have to restart the Workshop Tools to see them in the asset browser. I usually have to do this.
+**After you copy over particles, you may have to restart the Workshop Tools to see them in the asset browser. I usually have to do this.**
 
 ## Credits
 
