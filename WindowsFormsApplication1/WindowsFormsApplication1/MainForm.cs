@@ -92,30 +92,50 @@ namespace ParticleForker
                     Directory.Move(extractPath, Environment.CurrentDirectory + @"\decompiled_particles");*/
                 }
 
-                MessageBox.Show("Please select the path to your dota_ugc folder.", "ParticleForker", MessageBoxButtons.OK);
-                // get the ugc path from the user.
-                FolderBrowserDialog dialog = new FolderBrowserDialog();
-                DialogResult result = dialog.ShowDialog();
-
-                if (result == DialogResult.OK)
+                // Auto-find the dota_ugc path.
+                string programfiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+                string possiblePath = Path.Combine(programfiles, "Steam", "SteamApps", "common", "dota 2 beta", "dota_ugc");
+                string possiblePath2 = Path.Combine(programfiles, "Steam", "SteamApps", "common", "dota 2", "dota_ugc");
+                string ugcPath = "";
+                if (Directory.Exists(possiblePath))
                 {
-                    Debug.WriteLine("DialogResult OK");
+                    ugcPath = possiblePath;
+                    MessageBox.Show("Path to dota_ugc detected: " + possiblePath, "ParticleForker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if (Directory.Exists(possiblePath2))
+                {
+                    ugcPath = possiblePath2;
+                    MessageBox.Show("Path to dota_ugc detected: " + possiblePath2, "ParticleForker", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                string ugcPath = dialog.SelectedPath;
-                // check if this is valid.
-                string ugc = ugcPath.Substring(ugcPath.LastIndexOf('\\') + 1);
-                if (ugc != "dota_ugc")
+                // get the ugc path from the user.
+                else
                 {
-                    DialogResult res = MessageBox.Show("That is not a path to your dota_ugc folder.", "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand);
+                    MessageBox.Show("Please select the path to your dota_ugc folder.", "ParticleForker", MessageBoxButtons.OK);
+                    FolderBrowserDialog dialog = new FolderBrowserDialog();
 
-                    if (res == DialogResult.Retry)
+                    DialogResult result = dialog.ShowDialog();
+
+                    if (result == DialogResult.OK)
                     {
-                        continue;
+                        Debug.WriteLine("DialogResult OK");
                     }
-                    else
+
+                    ugcPath = dialog.SelectedPath;
+                    // check if this is valid.
+                    string ugc = ugcPath.Substring(ugcPath.LastIndexOf('\\') + 1);
+                    if (ugc != "dota_ugc")
                     {
-                        break;
+                        DialogResult res = MessageBox.Show("That is not a path to your dota_ugc folder.", "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Hand);
+
+                        if (res == DialogResult.Retry)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                 }
 
@@ -174,6 +194,11 @@ namespace ParticleForker
                     {
                         string folderName = folderPath.Substring(folderPath.LastIndexOf('\\') + 1);
                         int particlesCopied = 0;
+
+                        // this is just to make the final output look prettier.
+                        string relativePathWin32 = "";
+                        bool relativePathWin32Set = false;
+
                         foreach (string path in ParticlePaths)
                         {
                             bool overwriteAllowed = true;
@@ -212,11 +237,33 @@ namespace ParticleForker
                                         // get the child specified.
                                         string childParticle = line.Substring(line.LastIndexOf('/') + 1);
                                         Debug.WriteLine("Child particle: " + childParticle);
-                                        string foldName = folderPath.Substring(folderPath.LastIndexOf('\\') + 1);
-                                        string relativePath = "particles/" + foldName + "/";
 
-                                        string newRef = "string m_ChildRef = \"" + relativePath + childParticle + "\n";
-                                        lines[i].Remove(0);
+                                        // Get the relative folder path for the child references.
+                                        string[] pathArr = folderPath.Split('\\');
+                                        string relFolderPath = "";
+                                        bool start = false;
+                                        for (int j = 0; j < pathArr.Length; j++)
+                                        {
+                                            if (pathArr[j] == "particles")
+                                            {
+                                                start = true;
+                                            }
+
+                                            if (start)
+                                            {
+                                                relFolderPath += pathArr[j] + "/";
+                                            }
+                                        }
+
+                                        // this is just to make the output look prettier.
+                                        if (relativePathWin32Set == false)
+                                        {
+                                            relativePathWin32 += relFolderPath.Replace('/', '\\');
+                                            relativePathWin32Set = true;
+                                        }
+
+                                        string newRef = "string m_ChildRef = \"" + relFolderPath + childParticle + "\n";
+                                        //lines[i].Remove(0);
                                         lines[i] = newRef;
                                         Debug.WriteLine("New ref: " + newRef);
                                     }
@@ -236,8 +283,10 @@ namespace ParticleForker
                         }
                         else
                         {
-                            MessageBox.Show("Particles have been copied to: " + folderPath + 
-                                " and their child references have been updated.", "ParticleForker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            MessageBox.Show("Particles have been copied to: " + relativePathWin32 + 
+                                " and their child references have been updated.", 
+                                "ParticleForker", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
