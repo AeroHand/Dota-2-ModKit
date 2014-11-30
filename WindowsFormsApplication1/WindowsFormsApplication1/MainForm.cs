@@ -20,9 +20,9 @@ namespace ParticleForker
         public static string ContentDirectory;
         public static string CurrAddonName;
 
-        public static ArrayList ContentAddonPaths = new ArrayList();
-        public static ArrayList GameAddonPaths = new ArrayList();
-        public static ArrayList AddonNames = new ArrayList();
+        public static List<string> ContentAddonPaths = new List<string>();
+        public static List<string> GameAddonPaths = new List<string>();
+        public static List<string> AddonNames = new List<string>();
         public static string[] ParticlePaths;
 
         public static string CurrAddonGamePath;
@@ -84,7 +84,6 @@ namespace ParticleForker
 
                     // this unfortunately gives an Unauthorized access exception on Directory.Move.
                     // Also, can't unzip directly into the Environment.CurrentDirectory because of the PathTooLong exception.
-
                     /*string zipPath = Environment.CurrentDirectory + @"\particles.zip";
                     string extractPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"\decompiled_particles";
                     MessageBox.Show("No decompiled particles detected. Extracting particles; please stand by.", "ParticleForker");
@@ -133,43 +132,6 @@ namespace ParticleForker
             }
             return false;
         }
-
-        private void trackingProj_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void linearProj_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void targetMin_Click(object sender, EventArgs e)
-        {
-            System.Windows.Forms.Clipboard.SetText("Hello. I've been copied to the clipboard!");
-        }
-        private void targetMax_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripDropDownButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Customize_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        /*private void newAddonBarebones_click(object sender, EventArgs e)
-        {
-
-            WebClient wc = new WebClient();
-            //Task t = wc.DownloadFileTaskAsync(new Uri("https://github.com/bmddota/barebones/archive/source2.zip"), "barebones.zip");
-
-            AddonBarebonesForm form = new AddonBarebonesForm();
-            form.Show();
-        }*/
 
         private void newParticles_Click(object sender, EventArgs e)
         {
@@ -295,7 +257,6 @@ namespace ParticleForker
             }
 
             // write the ugc path to the end of settings.txt.
-            //f.
             StreamWriter sw = System.IO.File.AppendText(SettingsPath);
             sw.Write(f.SelectedPath);
             sw.Close();
@@ -311,14 +272,12 @@ namespace ParticleForker
             {
                 if (str2.Contains("game"))
                 {
-                    //MessageBox.Show(str2);
                     GameDirectory = str2;
                     getGameAddons(str2);
 
                 }
                 if (str2.Contains("content"))
                 {
-                    //MessageBox.Show(str2);
                     ContentDirectory = str2;
                     getContentAddons(str2);
                 }
@@ -351,7 +310,6 @@ namespace ParticleForker
                     string[] addonsDir = Directory.GetDirectories(path);
                     foreach (string path2 in addonsDir)
                     {
-                        //MessageBox.Show(path2);
                         GameAddonPaths.Add(path2);
                     }
                 }
@@ -367,7 +325,6 @@ namespace ParticleForker
             {
                 string addon = path.Substring(path.LastIndexOf('\\') + 1);
                 AddonNames.Add(addon);
-                //item.Text = addon;
                 currentAddonDropDown.DropDownItems.Add(addon);
                 if (!first)
                 {
@@ -410,15 +367,9 @@ namespace ParticleForker
             }
         }
 
-        private void currentAddon_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void aboutButton_Click(object sender, EventArgs e)
         {
             AboutBox about = new AboutBox();
-            about.Visible = true;
             about.Show();
         }
     }

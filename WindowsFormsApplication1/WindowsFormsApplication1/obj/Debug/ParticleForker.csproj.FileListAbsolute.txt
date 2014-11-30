@@ -1,0 +1,15 @@
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ParticleForker.exe.config
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ParticleForker.exe.manifest
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ParticleForker.application
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ParticleForker.exe
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\ParticleForker.pdb
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ParticleForker.csprojResolveAssemblyReference.cache
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ParticleForker.AboutBox.resources
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ParticleForker.MainForm.resources
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ParticleForker.AddonBarebonesForm.resources
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ParticleForker.Properties.Resources.resources
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ParticleForker.csproj.GenerateResource.Cache
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ParticleForker.exe.manifest
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ParticleForker.application
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ParticleForker.exe
+C:\Users\Stephen52\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\ParticleForker.pdb

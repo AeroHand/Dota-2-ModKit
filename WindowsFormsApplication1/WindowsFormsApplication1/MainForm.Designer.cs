@@ -95,7 +95,6 @@
             this.currentAddonDropDown.Name = "currentAddonDropDown";
             this.currentAddonDropDown.Size = new System.Drawing.Size(108, 22);
             this.currentAddonDropDown.Text = "Current Addon: ";
-            this.currentAddonDropDown.Click += new System.EventHandler(this.currentAddon_Click);
             // 
             // aboutButton
             // 
