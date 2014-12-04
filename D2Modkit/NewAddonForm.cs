@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace D2Modkit
+namespace D2ModKit
 {
     public partial class AddonBarebonesForm : Form
     {

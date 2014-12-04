@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace D2Modkit
+namespace D2ModKit
 {
     partial class AboutBox : Form
     {

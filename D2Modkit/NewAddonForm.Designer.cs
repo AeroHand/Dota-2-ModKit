@@ -1,4 +1,4 @@
-﻿namespace D2Modkit
+﻿namespace D2ModKit
 {
     partial class AddonBarebonesForm
     {

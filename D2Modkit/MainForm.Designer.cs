@@ -1,4 +1,4 @@
-﻿namespace D2Modkit
+﻿namespace D2ModKit
 {
     partial class MainForm
     {
@@ -93,7 +93,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(335, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(345, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -151,7 +151,7 @@
             this.button2.Location = new System.Drawing.Point(156, 28);
             this.button2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(141, 32);
+            this.button2.Size = new System.Drawing.Size(126, 32);
             this.button2.TabIndex = 10;
             this.button2.Text = "Copy To Folder";
             this.toolTip1.SetToolTip(this.button2, "Copies the game and content directories of this addon into a specified folder.");
@@ -166,8 +166,7 @@
             this.button1.Size = new System.Drawing.Size(141, 32);
             this.button1.TabIndex = 11;
             this.button1.Text = "Generate Tooltips";
-            this.toolTip1.SetToolTip(this.button1, "Extracts tooltips from the files in the scripts\\npc directory of this mod.\r\nCreat" +
-        "es a new file tooltips.txt in \\resource.");
+            this.toolTip1.SetToolTip(this.button1, "Creates tooltips from the scripts\\npc files of this mod.");
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.generateAddonEnglish_Click);
             // 
@@ -175,7 +174,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 113);
+            this.ClientSize = new System.Drawing.Size(345, 108);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.newParticles);

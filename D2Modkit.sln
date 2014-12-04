@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D2Modkit", "D2Modkit\D2Modkit.csproj", "{FA54CC44-8042-4269-A103-CAE79DA1D5DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D2ModKit", "D2Modkit\D2ModKit.csproj", "{FA54CC44-8042-4269-A103-CAE79DA1D5DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

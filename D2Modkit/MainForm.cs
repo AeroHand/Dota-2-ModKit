@@ -14,7 +14,7 @@ using System.Diagnostics;
 using KVLib;
 using Microsoft.Win32;
 
-namespace D2Modkit
+namespace D2ModKit
 {
     public partial class MainForm : Form
     {
@@ -139,26 +139,6 @@ namespace D2Modkit
         {
             while (!HasSettings)
             {
-                // unzip particles first
-                while (!Directory.Exists(Path.Combine(Environment.CurrentDirectory, "decompiled_particles"))) {
-                    DialogResult res = MessageBox.Show("No decompiled_particles folder detected. Please extract decompiled_particles.rar into the D2ModKit folder before proceding.", "D2ModKit",
-                        MessageBoxButtons.OKCancel,MessageBoxIcon.Exclamation);
-
-                    if (res == DialogResult.Cancel)
-                    {
-                        Environment.Exit(1);
-                    }
-
-                    // this unfortunately gives an Unauthorized access exception on Directory.Move.
-                    // Also, can't unzip directly into the Environment.CurrentDirectory because of the PathTooLong exception.
-                    /*string zipPath = Environment.CurrentDirectory + @"\particles.zip";
-                    string extractPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + @"\decompiled_particles";
-                    MessageBox.Show("No decompiled particles detected. Extracting particles; please stand by.", "D2Modkit");
-                    ZipFile.ExtractToDirectory(zipPath, extractPath);
-                    // move the zipfiles over to the correct folder once done with extracting.
-                    Directory.Move(extractPath, Environment.CurrentDirectory + @"\decompiled_particles");*/
-                }
-
                 // Auto-find the dota_ugc path.
                 RegistryKey regKey = Registry.LocalMachine;
                 try
@@ -222,6 +202,13 @@ namespace D2Modkit
                     MessageBox.Show("You need to select your dota_ugc path before you can use this.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return;
                 }
+            }
+
+            if (!Directory.Exists(Path.Combine(Environment.CurrentDirectory, "decompiled_particles")))
+            {
+                MessageBox.Show("No decompiled_particles folder detected. Please place a decompiled_particles folder into the D2ModKit folder before proceding.", 
+                    "D2ModKit",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
 
@@ -419,14 +406,10 @@ namespace D2Modkit
         private void resetAddonNames()
         {
             currentAddonDropDown.DropDownItems.Clear();
-            //AddonNames.Clear();
             bool first = false;
             foreach (string name in AddonNames)
             {
-                //string addon = path.Substring(path.LastIndexOf('\\') + 1);
-                //AddonNames.Add(addon);
                 ToolStripItem item = currentAddonDropDown.DropDownItems.Add(name);
-                //item.Font = item.
                 item.Font = new Font("Segoe UI",12f, FontStyle.Bold, GraphicsUnit.Pixel);
                 if (!first)
                 {
@@ -463,7 +446,7 @@ namespace D2Modkit
             Debug.WriteLine("Current addon: " + currAddon.Name);
             currentAddonDropDown.Text = "Addon: " + currAddon.Name;
 
-            this.Text = "D2 Modkit - " + currAddon.Name;
+            this.Text = "D2 ModKit - " + currAddon.Name;
         }
 
         private void aboutButton_Click(object sender, EventArgs e)
@@ -510,7 +493,7 @@ namespace D2Modkit
             proc.Start();
             proc.Close();
 
-            //DialogResult r = MessageBox.Show("Would you like this addon to copy to this location everytime the \"Copy To Folder\" button is clicked?", "D2Modkit",
+            //DialogResult r = MessageBox.Show("Would you like this addon to copy to this location everytime the \"Copy To Folder\" button is clicked?", "D2ModKit",
             //    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
         }

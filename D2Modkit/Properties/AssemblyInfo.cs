@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("D2 Modkit")]
+[assembly: AssemblyTitle("D2 ModKit")]
 [assembly: AssemblyDescription("Credits: Special thanks to ToraxXx for decompiling all the Dota 2 particles!\n" +
     "\n Special Thanks to RoyAwesome for making KVLib, which allows easy parsing of Valve KV files.")]
 [assembly: AssemblyConfiguration("1.0")]
 [assembly: AssemblyCompany("Creator: Myll")]
-[assembly: AssemblyProduct("D2Modkit")]
+[assembly: AssemblyProduct("D2ModKit")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -33,5 +33,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.5.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
