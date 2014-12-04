@@ -1,7 +1,7 @@
-// *******************************************************************************************************
-// This file contains generated tooltips extracted from the files in the scripts/npc directory of this mod.
-// It does not contain keys already defined in addon_english.txt.
-// *******************************************************************************************************
+// **********************************************************************************************************************
+// This file contains generated tooltips created from the files in the scripts/npc directory of this mod.
+// It does not contain tooltips already defined in addon_english.txt, nor modifiers with the property "IsHidden" "1".
+// **********************************************************************************************************************
 
 // ******************** HEROES ********************
 
@@ -22,13 +22,18 @@
 "npc_dummy_unit"                                                                  ""
 "npc_precache_everything"                                                         ""
 
-// ******************** MODIFIERS ********************
-"DOTA_Tooltip_modifier_modifier_removestuff"                                      ""
-"DOTA_Tooltip_modifier_modifier_channel_start"                                    ""
-"DOTA_Tooltip_modifier_dummy_unit"                                                ""
-"DOTA_Tooltip_modifier_bh_dummy"                                                  ""
-"DOTA_Tooltip_modifier_modifier_sheep_boots"                                      ""
-"DOTA_Tooltip_modifier_modifier_item_shield"                                      ""
+// ******************** ABILITY MODIFIERS ********************
+"DOTA_Tooltip_modifier_removestuff"                                               ""
+"DOTA_Tooltip_modifier_removestuff_Description"                                   ""
+
+"DOTA_Tooltip_modifier_channel_start"                                             ""
+"DOTA_Tooltip_modifier_channel_start_Description"                                 ""
+
+
+// ******************** ITEM MODIFIERS ********************
+"DOTA_Tooltip_modifier_item_shield"                                               ""
+"DOTA_Tooltip_modifier_item_shield_Description"                                   ""
+
 
 // ******************** ABILITIES ********************
 "DOTA_Tooltip_ability_sheeptag_summon_golem"                                      ""
@@ -36,11 +41,6 @@
 "DOTA_Tooltip_ability_sheeptag_summon_golem_Note0"                                ""
 "DOTA_Tooltip_ability_sheeptag_summon_golem_Lore"                                 ""
 "DOTA_Tooltip_ability_sheeptag_summon_golem_goldcost"                             ""
-
-"DOTA_Tooltip_ability_sheeptag_cast_obs"                                          ""
-"DOTA_Tooltip_ability_sheeptag_cast_obs_Description"                              ""
-"DOTA_Tooltip_ability_sheeptag_cast_obs_Note0"                                    ""
-"DOTA_Tooltip_ability_sheeptag_cast_obs_Lore"                                     ""
 
 "DOTA_Tooltip_ability_sheeptag_cast_obs"                                          ""
 "DOTA_Tooltip_ability_sheeptag_cast_obs_Description"                              ""
@@ -177,26 +177,11 @@
 "DOTA_Tooltip_ability_example_ability_Description"                                ""
 "DOTA_Tooltip_ability_example_ability_Note0"                                      ""
 "DOTA_Tooltip_ability_example_ability_Lore"                                       ""
-
-"DOTA_Tooltip_ability_example_ability"                                            ""
-"DOTA_Tooltip_ability_example_ability_Description"                                ""
-"DOTA_Tooltip_ability_example_ability_Note0"                                      ""
-"DOTA_Tooltip_ability_example_ability_Lore"                                       ""
 "DOTA_Tooltip_ability_example_ability_duration"                                   ""
 "DOTA_Tooltip_ability_example_ability_damage"                                     ""
 "DOTA_Tooltip_ability_example_ability_radius"                                     ""
 "DOTA_Tooltip_ability_example_ability_distance"                                   ""
 "DOTA_Tooltip_ability_example_ability_height"                                     ""
-
-"DOTA_Tooltip_ability_sheeptag_dummy_unit"                                        ""
-"DOTA_Tooltip_ability_sheeptag_dummy_unit_Description"                            ""
-"DOTA_Tooltip_ability_sheeptag_dummy_unit_Note0"                                  ""
-"DOTA_Tooltip_ability_sheeptag_dummy_unit_Lore"                                   ""
-
-"DOTA_Tooltip_ability_bh_dummy_unit"                                              ""
-"DOTA_Tooltip_ability_bh_dummy_unit_Description"                                  ""
-"DOTA_Tooltip_ability_bh_dummy_unit_Note0"                                        ""
-"DOTA_Tooltip_ability_bh_dummy_unit_Lore"                                         ""
 
 
 // ******************** ITEMS ********************
@@ -217,11 +202,6 @@
 "DOTA_Tooltip_ability_item_placebuilding_squares_per_side"                        ""
 "DOTA_Tooltip_ability_item_placebuilding_building_size"                           ""
 
-"DOTA_Tooltip_ability_item_sheep_boots"                                           ""
-"DOTA_Tooltip_ability_item_sheep_boots_Description"                               ""
-"DOTA_Tooltip_ability_item_sheep_boots_Note0"                                     ""
-"DOTA_Tooltip_ability_item_sheep_boots_Lore"                                      ""
-
 "DOTA_Tooltip_ability_item_sheep"                                                 ""
 "DOTA_Tooltip_ability_item_sheep_Description"                                     ""
 "DOTA_Tooltip_ability_item_sheep_Note0"                                           ""
@@ -232,4 +212,27 @@
 "DOTA_Tooltip_ability_item_sheep_bonus_mana_regen"                                ""
 "DOTA_Tooltip_ability_item_sheep_sheep_duration"                                  ""
 "DOTA_Tooltip_ability_item_sheep_sheep_movement_speed"                            ""
+
+"DOTA_Tooltip_ability_item_savesheep"                                             ""
+"DOTA_Tooltip_ability_item_savesheep_Description"                                 ""
+"DOTA_Tooltip_ability_item_savesheep_Note0"                                       ""
+"DOTA_Tooltip_ability_item_savesheep_Lore"                                        ""
+"DOTA_Tooltip_ability_item_savesheep_channeltime"                                 ""
+
+"DOTA_Tooltip_ability_item_deletelast"                                            ""
+"DOTA_Tooltip_ability_item_deletelast_Description"                                ""
+"DOTA_Tooltip_ability_item_deletelast_Note0"                                      ""
+"DOTA_Tooltip_ability_item_deletelast_Lore"                                       ""
+"DOTA_Tooltip_ability_item_deletelast_speed"                                      ""
+
+"DOTA_Tooltip_ability_item_example_item"                                          ""
+"DOTA_Tooltip_ability_item_example_item_Description"                              ""
+"DOTA_Tooltip_ability_item_example_item_Note0"                                    ""
+"DOTA_Tooltip_ability_item_example_item_Lore"                                     ""
+"DOTA_Tooltip_ability_item_example_item_duration"                                 ""
+"DOTA_Tooltip_ability_item_example_item_damage_reduction"                         ""
+"DOTA_Tooltip_ability_item_example_item_radius"                                   ""
+"DOTA_Tooltip_ability_item_example_item_speed"                                    ""
+"DOTA_Tooltip_ability_item_example_item_distance"                                 ""
+"DOTA_Tooltip_ability_item_example_item_damage"                                   ""
 

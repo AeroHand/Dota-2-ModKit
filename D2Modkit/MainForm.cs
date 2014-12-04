@@ -372,9 +372,7 @@ namespace D2ModKit
             }
             else
             {
-
-                MessageBox.Show("Particles have been copied to: \\" + relativePathWin32 + 
-                    " and their child references have been updated.",
+                MessageBox.Show("Particles have been copied to: \\" + relativePathWin32,
                     "D2ModKit", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }            
         }

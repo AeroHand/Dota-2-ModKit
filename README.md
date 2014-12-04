@@ -12,9 +12,9 @@ A GUI comprised of useful tools to help with Dota 2 modding.
 
 ## Installation
 
-1. Download D2ModKit.rar and extract it, or you can build from the .sln. If you're building from the .sln, you need to copy over the .dll's from the .rar over to the Debug folder for it to compile.
+1. [Download here](https://github.com/Myll/Dota-2-ModKit/releases), or you can build from the .sln.
 
-2. If you already have the decompiled particles, move them over to the D2ModKit folder. **Rename the decompiled particles folder to decompiled_particles**. If you don't have the decompiled particles, this program comes with decompiled_particles.rar.
+2. If you already have the decompiled particles, move them over to the D2ModKit folder. **Rename the decompiled particles folder to decompiled_particles**. If you don't have the decompiled particles, [Click here to DL](https://mega.co.nz/#!cpgkSQbY!_xjYFGgkL2yhv0l8MPjEfESjN7B1S0cVP-QXsx3c-7M).
 
 3. Open D2ModKit.exe
 
