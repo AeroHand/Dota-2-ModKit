@@ -1,9 +1,9 @@
 # Dota 2 ModKit
 
-A GUI comprised of useful tools to help people make Dota 2 mods.
+A GUI comprised of useful tools to help with Dota 2 modding.
 
 ## Features:
-* **Particle Forker**. Allows easy copying of decompiled particles into your addons. This will automatically change the child references after the particles are copied over.
+* **Particle Forker**. Allows easy copying of decompiled particles into your addons. This will automatically change the child references after the particles are copied over. Also, you can re-color the whole particle system with just the click of a button!
 * **Tooltips Generator**. Parses all the files in the scripts\npc folder of your addon, and creates tooltips for abilities, items, modifiers, units, and heroes, which you can easily copy over to addon_english.txt or another language file.
 * **Copy Addon to another folder**. Copies the game and content directories of your addon to another folder, so it's neatly structured.
 
