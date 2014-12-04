@@ -92,6 +92,12 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Addon.cs" />
+    <Compile Include="ParticleRenameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParticleRenameForm.Designer.cs">
+      <DependentUpon>ParticleRenameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ParticleRenameForm.resx">
+      <DependentUpon>ParticleRenameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,6 +134,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="ParticleForker_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">

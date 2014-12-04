@@ -85,9 +85,12 @@ namespace D2ModKit
         {
             // prevent modifier_modifier names
             name = new Pair("DOTA_Tooltip_modifier_" + _name, "");
-            if (_name.Substring(0, 8) == "modifier")
+            if (_name.Length > 8)
             {
-                name = new Pair("DOTA_Tooltip_" + _name, "");
+                if (_name.Substring(0, 8) == "modifier")
+                {
+                    name = new Pair("DOTA_Tooltip_" + _name, "");
+                }
             }
             description = new Pair(name.Key + "_Description", "");
         }

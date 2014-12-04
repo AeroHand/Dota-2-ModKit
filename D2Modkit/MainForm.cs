@@ -108,6 +108,14 @@ namespace D2ModKit
             set { addons = value; }
         }
 
+        private ParticleRenameForm pRenameForm;
+
+        public ParticleRenameForm PRenameForm
+        {
+            get { return pRenameForm; }
+            set { pRenameForm = value; }
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -126,7 +134,7 @@ namespace D2ModKit
             if (HasSettings) {
                 // and use that to find the game and content dirs.
                 getAddons();
-                resetAddonNames();
+                selectCurrentAddon(Properties.Settings.Default.CurrAddon);
             }
             else
             {
@@ -186,11 +194,27 @@ namespace D2ModKit
 
                 // get the game and content dirs from the ugc path.
                 getAddons();
-                resetAddonNames();
                 HasSettings = true;
                 return true;
             }
             return false;
+        }
+
+        private string[] getRGB()
+        {
+            string[] rgb = new string[3];
+            ColorDialog color = new ColorDialog();
+            color.AnyColor = true;
+            color.AllowFullOpen = true;
+            DialogResult re = color.ShowDialog();
+            if (re == DialogResult.OK)
+            {
+                Color picked = color.Color;
+                rgb[0] = picked.R.ToString();
+                rgb[1] = picked.G.ToString();
+                rgb[2] = picked.B.ToString();
+            }
+            return rgb;
         }
 
         private void newParticles_Click(object sender, EventArgs e)
@@ -249,18 +273,7 @@ namespace D2ModKit
             if (r == DialogResult.Yes)
             {
                 changeColor = true;
-                ColorDialog color = new ColorDialog();
-                color.AnyColor = true;
-                color.AllowFullOpen = true;
-                DialogResult re = color.ShowDialog();
-                if (re == DialogResult.OK)
-                {
-                    Color picked = color.Color;
-                    rgb[0] = picked.R.ToString();
-                    rgb[1] = picked.G.ToString();
-                    rgb[2] = picked.B.ToString();
-                }
-
+                rgb = getRGB();
             }
 
             string folderName = folderPath.Substring(folderPath.LastIndexOf('\\') + 1);
@@ -296,14 +309,14 @@ namespace D2ModKit
                     // fix child refs.
                     string[] lines = System.IO.File.ReadAllLines(targetPath);
                     string allText = "";
-                    bool overrwrite = false;
+                    bool changeParticle = false;
 
                     for (int i = 0; i < lines.Count(); i++)
                     {
                         string line = lines[i];
                         if (line.Contains("string m_ChildRef = "))
                         {
-                            overrwrite = true;
+                            changeParticle = true;
                             // we need to completely overwrite this line.
                             // get the child specified.
                             string childParticle = line.Substring(line.LastIndexOf('/') + 1);
@@ -342,7 +355,7 @@ namespace D2ModKit
                             if (line.Contains("ColorMin") || line.Contains("ColorMax") || line.Contains("ConstantColor") || line.Contains("TintMin")
                                 || line.Contains("TintMax"))
                             {
-                                overrwrite = true;
+                                changeParticle = true;
                                 string part1 = line.Substring(0, line.LastIndexOf('=')+2);
                                 string part2 = line.Substring(line.LastIndexOf('=')+2);
                                 //Debug.WriteLine("Part1: " + part1);
@@ -359,7 +372,7 @@ namespace D2ModKit
 
                         allText += lines[i] + "\n";
                     }
-                    if (overrwrite)
+                    if (changeParticle)
                     {
                         // everything in the array is now correct. copy the array to the new file.
                         System.IO.File.WriteAllText(targetPath, allText);
@@ -398,23 +411,16 @@ namespace D2ModKit
                     }
                 }
             }
-            resetAddonNames();
+            setAddonNames();
         }
 
-        private void resetAddonNames()
+        private void setAddonNames()
         {
             currentAddonDropDown.DropDownItems.Clear();
-            bool first = false;
             foreach (string name in AddonNames)
             {
                 ToolStripItem item = currentAddonDropDown.DropDownItems.Add(name);
                 item.Font = new Font("Segoe UI",12f, FontStyle.Bold, GraphicsUnit.Pixel);
-                if (!first)
-                {
-                    currAddon = getAddonFromName(name);
-                    selectCurrentAddon(name);
-                    first = true;
-                }
             }
         }
 
@@ -440,7 +446,18 @@ namespace D2ModKit
 
         void selectCurrentAddon(string addon)
         {
-            currAddon = getAddonFromName(addon);
+            if (addon == "")
+            {
+                currAddon = Addons[0];
+
+            }
+            else
+            {
+                currAddon = getAddonFromName(addon);
+            }
+
+            Properties.Settings.Default.CurrAddon = currAddon.Name;
+            Properties.Settings.Default.Save();
             Debug.WriteLine("Current addon: " + currAddon.Name);
             currentAddonDropDown.Text = "Addon: " + currAddon.Name;
 
@@ -469,7 +486,7 @@ namespace D2ModKit
         private void copyToFolder_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog f = new FolderBrowserDialog();
-            f.RootFolder = Environment.SpecialFolder.MyDocuments;
+            f.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             f.Description = "Enter the folder to copy this addon's game and content directories to:";
             DialogResult res = f.ShowDialog();
             if (res == DialogResult.OK)
@@ -489,7 +506,7 @@ namespace D2ModKit
             proc.Start();
             proc.StartInfo.Arguments = "\"" + currAddon.GamePath + "\" \"" + Path.Combine(currAddon.CopyPath, "game") + "\" /D /E /I /Y";
             proc.Start();
-            proc.Close();
+            //proc.Close();
 
             //DialogResult r = MessageBox.Show("Would you like this addon to copy to this location everytime the \"Copy To Folder\" button is clicked?", "D2ModKit",
             //    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -504,6 +521,125 @@ namespace D2ModKit
         private void contentDir_Click(object sender, EventArgs e)
         {
             Process.Start(currAddon.ContentPath);
+        }
+
+        private void changeParticleColor(string path, string[] rgb)
+        {
+            string[] lines = System.IO.File.ReadAllLines(path);
+            string output = "";
+            for (int i = 0; i < lines.Count(); i++)
+            {
+                string line = lines[i];
+                if (line.Contains("ColorMin") || line.Contains("ColorMax") || line.Contains("ConstantColor") || line.Contains("TintMin")
+                    || line.Contains("TintMax"))
+                {
+                    string part1 = line.Substring(0, line.LastIndexOf('=') + 2);
+                    string part2 = line.Substring(line.LastIndexOf('=') + 2);
+                    //Debug.WriteLine("Part1: " + part1);
+                    //Debug.WriteLine("Part2: " + part2);
+                    part2 = part2.Replace("(", "");
+                    part2 = part2.Replace(")", "");
+                    string[] nums = part2.Split(',');
+                    string lastNum = nums[3];
+                    string newPart2 = "(" + " " + rgb[0] + ", " + rgb[1] + ", " + rgb[2] + ", " + lastNum + " )";
+                    lines[i] = part1 + newPart2;
+                }
+                output += lines[i] + "\n";
+            }
+            System.IO.File.WriteAllText(path, output);
+        }
+
+        private void recolorParticles_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            Debug.WriteLine("Current directory: " + Environment.CurrentDirectory);
+            fd.InitialDirectory = Path.Combine(currAddon.ContentPath, "particles");
+            fd.Multiselect = true;
+            fd.Title = "Select particles to recolor";
+            DialogResult res = fd.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                string[] paths = fd.FileNames;
+                string[] rgb = getRGB();
+                for (int i = 0; i < paths.Count(); i++)
+                {
+                    changeParticleColor(paths.ElementAt(i), rgb);
+                }
+                MessageBox.Show("Particles successfully recolored.", "D2ModKit", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private string newParticlesName;
+
+        public string NewParticlesName
+        {
+            get { return newParticlesName; }
+            set { newParticlesName = value; }
+        }
+
+        private void renameParticles_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            Debug.WriteLine("Current directory: " + Environment.CurrentDirectory);
+            fd.InitialDirectory = Path.Combine(currAddon.ContentPath, "particles");
+            fd.Multiselect = true;
+            fd.Title = "Select particles to rename";
+            DialogResult res = fd.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                string[] paths = fd.FileNames;
+                PRenameForm = new ParticleRenameForm(paths);
+                PRenameForm.Submit.Click += Submit_Click;
+                PRenameForm.Paths = paths;
+
+                DialogResult r = PRenameForm.ShowDialog();
+                if (r == DialogResult.Abort || r == DialogResult.Cancel)
+                {
+                    return;
+                }
+
+                for (int i = 0; i < paths.Count(); i++)
+                {
+
+                    //System.IO.File.Move()
+                }
+            }
+        }
+
+        private void renameParticles(string[] paths, string newBase)
+        {
+            // the name with the shortest chars will become the base.
+            string currBase = paths[0];
+            for (int i = 0; i < paths.Count(); i++)
+            {
+                string p = paths.ElementAt(i);
+                string currName = p.Substring(p.LastIndexOf('\\') + 1);
+                if (currName.Length < currBase.Length)
+                {
+                    currBase = currName;
+                }
+            }
+            // remove the .vpcf from the base.
+            currBase = currBase.Substring(0, currBase.Length - 5);
+            Debug.WriteLine("Base: " + currBase);
+            for (int i = 0; i < paths.Count(); i++)
+            {
+                string p = paths.ElementAt(i);
+                string currName = p.Substring(p.LastIndexOf('\\') + 1);
+                string newName = currName.Replace(currBase, newBase);
+                //Debug.WriteLine("New name: " + newName);
+                string newPath = Path.Combine(p.Substring(0, p.LastIndexOf('\\')), newName);
+                System.IO.File.Move(paths[i], newPath);
+            }
+        }
+
+        void Submit_Click(object sender, EventArgs e)
+        {
+            PRenameForm.Close();
+            string[] paths = PRenameForm.Paths;
+            string newBase = PRenameForm.PTextBox.Text;
+            renameParticles(paths, newBase);
+            Process.Start(paths[0].Substring(0, paths[0].LastIndexOf('\\')));
         }
     }
 }
